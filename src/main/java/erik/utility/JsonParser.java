@@ -1,8 +1,8 @@
 package erik.utility;
 
-import erik.animals.Animal;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import erik.animals.Animal;
 
 import java.io.File;
 import java.io.IOException;
