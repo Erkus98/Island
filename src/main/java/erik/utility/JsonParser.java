@@ -1,5 +1,6 @@
 package erik.utility;
 
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import erik.animals.Animal;
