@@ -1,7 +1,7 @@
-package Erik.animal_actions;
+package erik.animal_actions;
 
-import Erik.Field;
-import Erik.animals.Animal;
+import erik.Field;
+import erik.animals.Animal;
 
 import java.util.List;
 import java.util.Map;

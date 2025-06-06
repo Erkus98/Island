@@ -1,9 +1,9 @@
-package Erik.utility;
+package erik.utility;
 
-import Erik.animals.Animal;
-import Erik.animals.Plant;
-import Erik.animals.herbivores.*;
-import Erik.animals.predators.*;
+import erik.animals.Animal;
+import erik.animals.Plant;
+import erik.animals.herbivores.*;
+import erik.animals.predators.*;
 
 import java.io.IOException;
 import java.util.*;

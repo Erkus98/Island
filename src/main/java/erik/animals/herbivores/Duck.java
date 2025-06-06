@@ -1,6 +1,6 @@
-package Erik.animals.herbivores;
+package erik.animals.herbivores;
 
-import Erik.animals.Herbivore;
+import erik.animals.Herbivore;
 
 public class Duck extends Herbivore {
     public Duck(){

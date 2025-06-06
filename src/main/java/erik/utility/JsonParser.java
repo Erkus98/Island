@@ -1,6 +1,6 @@
-package Erik.utility;
+package erik.utility;
 
-import Erik.animals.Animal;
+import erik.animals.Animal;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

@@ -1,6 +1,6 @@
-package Erik.animals.predators;
+package erik.animals.predators;
 
-import Erik.animals.Predator;
+import erik.animals.Predator;
 
 public class Eagle extends Predator {
     public Eagle(){

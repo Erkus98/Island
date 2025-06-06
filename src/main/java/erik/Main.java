@@ -1,8 +1,7 @@
-package Erik;
+package erik;
 
-import Erik.animals.Animal;
-import Erik.utility.AnimalCreator;
-import Erik.utility.IslandActions;
+import erik.animals.Animal;
+import erik.utility.IslandActions;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -16,7 +15,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
 
-        AnimalCreator animalCreator = new AnimalCreator();
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         IslandActions islandActions = new IslandActions();
         Future<Map<Field, List<Animal>>> island = executorService.submit(islandActions);

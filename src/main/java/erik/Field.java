@@ -1,4 +1,4 @@
-package Erik;
+package erik;
 
 import java.util.Objects;
 

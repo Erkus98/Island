@@ -1,4 +1,4 @@
-package Erik.animals;
+package erik.animals;
 
 public abstract class Animal {
     protected String type;
