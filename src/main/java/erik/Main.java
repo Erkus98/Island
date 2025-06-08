@@ -1,6 +1,7 @@
 package erik;
 
 import erik.animals.Animal;
+import erik.utility.EatingFunctionality;
 import erik.utility.IslandActions;
 
 import java.util.*;
@@ -34,7 +35,7 @@ public class Main {
         islandActions.showAnimals(island);
 
 
-        
+        EatingFunctionality eatingFunctionality = new EatingFunctionality();
 
 
     }
