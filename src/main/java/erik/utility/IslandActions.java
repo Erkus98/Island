@@ -1,7 +1,7 @@
 package erik.utility;
 
 import erik.Field;
-import erik.animal_actions.AnimalFeatures;
+import erik.animal_actions.AnimalMovement;
 import erik.animals.Animal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +12,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class IslandActions implements Callable<Map<Field, List<Animal>>>, AnimalFeatures {
+public class IslandActions implements Callable<Map<Field, List<Animal>>>, AnimalMovement {
 
     ThreadLocalRandom random;
+    private final byte energyRequiredForMovement = 20;
 
     @Override
     public Map<Field, List<Animal>> call() throws Exception {
@@ -121,7 +122,19 @@ public class IslandActions implements Callable<Map<Field, List<Animal>>>, Animal
 
 
         List<Animal> updatedAnimalList = islandMap.computeIfAbsent(newAnimalDestination, k -> new ArrayList<>());
+        if(reduceHealthOfAnimal(animal)){
+            return;
+        }
         updatedAnimalList.add(animal);
+    }
+
+    private boolean reduceHealthOfAnimal(Animal animal){
+        animal.setHealth((byte) (animal.getHealth() -energyRequiredForMovement));
+        if(animal.getHealth() == 0){
+            System.out.println(animal + " has died from starvation!");
+            return true;
+        }
+        return false;
     }
 
 }

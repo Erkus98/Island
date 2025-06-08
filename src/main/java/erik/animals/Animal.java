@@ -6,9 +6,18 @@ public abstract class Animal {
     protected int maxAmountOnOneField;
     protected int speedPerCycle;
     protected double kgToBeFull;
+    protected byte health = 100;
 
     public Animal() {
 
+    }
+
+    public byte getHealth() {
+        return health;
+    }
+
+    public void setHealth(byte health) {
+        this.health = health;
     }
 
     public double getWeight() {
