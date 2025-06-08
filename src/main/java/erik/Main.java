@@ -23,11 +23,10 @@ public class Main {
         scanner = new Scanner(System.in);
         System.out.println("Would you like to see visual representation of animals? \n " + " Y/N \n");
         String input = scanner.nextLine();
-        switch (input) {
-            case "Y" -> islandActions.showAnimals(island);
-            default -> {
-                return;
-            }
+        if (input.equals("Y")) {
+            islandActions.showAnimals(island);
+        } else {
+            return;
         }
         System.out.println("_________________________________");
 
