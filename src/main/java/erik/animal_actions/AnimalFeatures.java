@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-public interface Movement {
+public interface AnimalFeatures {
 
      void move(Future<Map<Field, List<Animal>>> island);
 

@@ -1,7 +1,7 @@
 package erik.utility;
 
 import erik.Field;
-import erik.animal_actions.Movement;
+import erik.animal_actions.AnimalFeatures;
 import erik.animals.Animal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,8 +12,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class IslandActions implements Callable<Map<Field, List<Animal>>>, Movement {
+public class IslandActions implements Callable<Map<Field, List<Animal>>>, AnimalFeatures {
 
+    ThreadLocalRandom random;
 
     @Override
     public Map<Field, List<Animal>> call() throws Exception {
@@ -83,7 +84,7 @@ public class IslandActions implements Callable<Map<Field, List<Animal>>>, Moveme
         int steps = animal.getSpeedPerCycle();
 
         while (steps > 0) {
-            ThreadLocalRandom random = ThreadLocalRandom.current();
+             random = ThreadLocalRandom.current();
             char direction = (char) (random.nextInt(4) + 'a');
             if (direction == 'a' && newX != 1) {
                 newX -= 1;
