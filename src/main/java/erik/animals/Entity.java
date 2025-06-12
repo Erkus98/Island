@@ -1,6 +1,6 @@
 package erik.animals;
 
-import erik.animal_actions.Hunt;
+
 
 public abstract class Entity {
     protected String type;
@@ -10,7 +10,7 @@ public abstract class Entity {
     protected double kgToBeFull;
     protected byte health = 100;
 
-    public Entity() {
+    protected Entity() {
 
     }
 
