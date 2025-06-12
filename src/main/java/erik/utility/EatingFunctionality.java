@@ -1,15 +1,15 @@
 package erik.utility;
 
-import erik.animals.Animal;
+import erik.animals.Entity;
 
 import java.util.Map;
 
 public class EatingFunctionality {
 
-    Map<Map<Animal,Animal>,Double> consumingRatio;
+    Map<Map<Entity, Entity>,Double> consumingRatio;
 
 
-    public void eat(){
+    public void consume(){
 
     }
 

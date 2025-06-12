@@ -1,6 +1,6 @@
 package erik;
 
-import erik.animals.Animal;
+import erik.animals.Entity;
 import erik.utility.EatingFunctionality;
 import erik.utility.IslandActions;
 
@@ -18,17 +18,11 @@ public class Main {
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         IslandActions islandActions = new IslandActions();
-        Future<Map<Field, List<Animal>>> island = executorService.submit(islandActions);
+        Future<Map<Field, List<Entity>>> island = executorService.submit(islandActions);
 
         executorService.close();
-        scanner = new Scanner(System.in);
-        System.out.println("Would you like to see visual representation of animals? \n " + " Y/N \n");
-        String input = scanner.nextLine();
-        if (input.equals("Y")) {
-            islandActions.showAnimals(island);
-        } else {
-            return;
-        }
+        islandActions.showAnimals(island);
+
         System.out.println("_________________________________");
 
         islandActions.move(island);

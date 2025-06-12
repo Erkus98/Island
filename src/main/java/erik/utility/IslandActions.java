@@ -1,8 +1,9 @@
 package erik.utility;
 
 import erik.Field;
-import erik.animal_actions.AnimalMovement;
-import erik.animals.Animal;
+import erik.animals.Entity;
+import erik.animals.Predator;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,34 +13,34 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class IslandActions implements Callable<Map<Field, List<Animal>>>, AnimalMovement {
+public class IslandActions implements Callable<Map<Field, List<Entity>>>{
 
     ThreadLocalRandom random;
-    private final byte energyRequiredForMovement = 20;
+    private final byte energyRequiredForMovement = 10;
 
     @Override
-    public Map<Field, List<Animal>> call() throws Exception {
+    public Map<Field, List<Entity>> call() throws Exception {
 
-        AnimalCreator animalCreator = new AnimalCreator();
-        Map<Field, List<Animal>> island = new HashMap<>();
+        EntityCreator entityCreator = new EntityCreator();
+        Map<Field, List<Entity>> island = new HashMap<>();
         for (short i = 1; i <= Field.ISLAND_LENGTH; i++) {
             for (short j = 1; j <= Field.ISLAND_WIDTH; j++) {
-                island.put(new Field(i, j), animalCreator.createAnimalList());
+                island.put(new Field(i, j), entityCreator.createAnimalList());
             }
         }
         return island;
     }
 
 
-    public void showAnimals(Future<Map<Field, List<Animal>>> island) throws Exception {
+    public void showAnimals(Future<Map<Field, List<Entity>>> island) throws Exception {
 
 
         Map<Field, List<String>> transformedIsland = new HashMap<>();
 
         island.get().entrySet().forEach(entry -> {
             Field field = entry.getKey();
-            List<Animal> animalList = entry.getValue();
-            List<String> characterList = animalList.stream().map(Animal::transformFaces).toList();
+            List<Entity> entityList = entry.getValue();
+            List<String> characterList = entityList.stream().map(Entity::transformFaces).toList();
             transformedIsland.put(field, characterList);
         });
 
@@ -47,26 +48,26 @@ public class IslandActions implements Callable<Map<Field, List<Animal>>>, Animal
         System.out.println(transformedIsland);
     }
 
-    public void move(Future<Map<Field, List<Animal>>> islandFuture) {
+    public void move(Future<Map<Field, List<Entity>>> islandFuture) {
         try {
-            Map<Field, List<Animal>> islandMap = islandFuture.get();
+            Map<Field, List<Entity>> islandMap = islandFuture.get();
             if (islandMap == null) {
                 System.err.println("Error: Island map is null.");
                 return;
             }
-            List<Map.Entry<Field, List<Animal>>> entriesToProcess = new ArrayList<>(islandMap.entrySet());
+            List<Map.Entry<Field, List<Entity>>> entriesToProcess = new ArrayList<>(islandMap.entrySet());
 
-            for (Map.Entry<Field, List<Animal>> entry : entriesToProcess) {
+            for (Map.Entry<Field, List<Entity>> entry : entriesToProcess) {
                 Field currentField = entry.getKey();
-                List<Animal> animalList = entry.getValue();
-                List<Animal> animalsOnCurrentField = new ArrayList<>(animalList);
+                List<Entity> entityList = entry.getValue();
+                List<Entity> animalsOnCurrentField = new ArrayList<>(entityList);
 
-                for (Animal animal : animalsOnCurrentField) {
+                for (Entity entity : animalsOnCurrentField) {
 
-                    Field newAnimalDestination = calculateNewAnimalPosition(animal, currentField);
+                    Field newAnimalDestination = calculateNewAnimalPosition(entity, currentField);
 
 
-                    updateIslandMap(islandMap, animal, currentField, newAnimalDestination);
+                    updateIslandMap(islandMap, entity, currentField, newAnimalDestination);
                 }
             }
         } catch (InterruptedException e) {
@@ -79,10 +80,10 @@ public class IslandActions implements Callable<Map<Field, List<Animal>>>, Animal
     }
 
 
-    private Field calculateNewAnimalPosition(Animal animal, Field currentField) {
+    private Field calculateNewAnimalPosition(Entity entity, Field currentField) {
         short newX = currentField.getX();
         short newY = currentField.getY();
-        int steps = animal.getSpeedPerCycle();
+        int steps = entity.getSpeedPerCycle();
 
         while (steps > 0) {
              random = ThreadLocalRandom.current();
@@ -105,33 +106,34 @@ public class IslandActions implements Callable<Map<Field, List<Animal>>>, Animal
 
     }
 
-    private void updateIslandMap(Map<Field, List<Animal>> islandMap, Animal animal, Field currentField, Field newAnimalDestination) {
-        List<Animal> animalsOnCurrentField = islandMap.get(currentField);
+    private void updateIslandMap(Map<Field, List<Entity>> islandMap, Entity entity, Field currentField, Field newAnimalDestination) {
+        List<Entity> animalsOnCurrentField = islandMap.get(currentField);
         if (animalsOnCurrentField != null) {
-            boolean animalWasRemoved = animalsOnCurrentField.remove(animal);
+            boolean animalWasRemoved = animalsOnCurrentField.remove(entity);
             if (!animalWasRemoved) {
-                System.err.println("Error: Animal " + animal + " is not found on " + currentField + " for deletion!.");
+                System.err.println("Error: Animal " + entity + " is not found on " + currentField + " for deletion!.");
             }
 
             if (animalsOnCurrentField.isEmpty()) {
                 islandMap.remove(currentField);
             }
         } else {
-            System.err.println("Warning: Current field " + currentField + " not found in map for animal " + animal + ".");
+            System.err.println("Warning: Current field " + currentField + " not found in map for animal " + entity + ".");
         }
 
 
-        List<Animal> updatedAnimalList = islandMap.computeIfAbsent(newAnimalDestination, k -> new ArrayList<>());
-        if(reduceHealthOfAnimal(animal)){
+        List<Entity> updatedEntityList = islandMap.computeIfAbsent(newAnimalDestination, k -> new ArrayList<>());
+        if(reduceHealthOfAnimal(entity)){
             return;
         }
-        updatedAnimalList.add(animal);
+        updatedEntityList.add(entity);
+      //  System.out.println(animal + " from field " + currentField + " moved to field " + newAnimalDestination);
     }
 
-    private boolean reduceHealthOfAnimal(Animal animal){
-        animal.setHealth((byte) (animal.getHealth() -energyRequiredForMovement));
-        if(animal.getHealth() == 0){
-            System.out.println(animal + " has died from starvation!");
+    private boolean reduceHealthOfAnimal(Entity entity){
+        entity.setHealth((byte) (entity.getHealth() -energyRequiredForMovement));
+        if(entity.getHealth() <= 0){
+            System.out.println(entity.getType() + " has died from starvation!");
             return true;
         }
         return false;

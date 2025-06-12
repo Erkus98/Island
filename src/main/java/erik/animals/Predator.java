@@ -1,8 +1,14 @@
 package erik.animals;
 
-public abstract class Predator extends Animal {
+import erik.animal_actions.Hunt;
+
+public abstract class Predator extends Entity implements Hunt {
 
     public Predator(){
+
+    }
+
+    public void eat(){
 
     }
 

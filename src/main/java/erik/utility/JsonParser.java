@@ -3,7 +3,7 @@ package erik.utility;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import erik.animals.Animal;
+import erik.animals.Entity;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class JsonParser {
 
-    public <T extends Animal> T deserializeJson(T animal) throws IOException {
+    public <T extends Entity> T deserializeJson(T animal) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         File jsonFile = new File("src/main/resources/animal.chars.json");

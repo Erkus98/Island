@@ -1,6 +1,8 @@
 package erik.animals;
 
-public abstract class Animal {
+import erik.animal_actions.Hunt;
+
+public abstract class Entity {
     protected String type;
     protected double weight;
     protected int maxAmountOnOneField;
@@ -8,7 +10,7 @@ public abstract class Animal {
     protected double kgToBeFull;
     protected byte health = 100;
 
-    public Animal() {
+    public Entity() {
 
     }
 
@@ -60,8 +62,8 @@ public abstract class Animal {
         this.type = type;
     }
 
-    public static String transformFaces(Animal animal) {
-        return switch (animal.getType()) {
+    public static String transformFaces(Entity entity) {
+        return switch (entity.getType()) {
             case "boar" -> "\uD83D\uDC17"; //🐗
 
             case "buffalo" -> "\uD83D\uDC03";//🐃
@@ -105,6 +107,7 @@ public abstract class Animal {
                 ", maxAmountOnOneField=" + maxAmountOnOneField +
                 ", speedPerCycle=" + speedPerCycle +
                 ", kgToBeFull=" + kgToBeFull +
+                ", health=" + health +
                 '}';
     }
 }
