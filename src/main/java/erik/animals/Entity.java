@@ -1,8 +1,9 @@
 package erik.animals;
 
 
+import erik.animal_actions.AnimalActivities;
 
-public abstract class Entity {
+public abstract class Entity implements AnimalActivities {
     protected String type;
     protected double weight;
     protected int maxAmountOnOneField;

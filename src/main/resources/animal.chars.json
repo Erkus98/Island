@@ -2,112 +2,112 @@
   {
     "type": "wolf",
     "weight": 50,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 30,
     "speedPerCycle": 3,
     "kgToBeFull": 8
   },
   {
     "type": "snake",
     "weight": 15,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 30,
     "speedPerCycle": 1,
     "kgToBeFull": 3
   },
   {
     "type": "fox",
     "weight": 8,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 30,
     "speedPerCycle": 2,
     "kgToBeFull": 2
   },
   {
     "type": "bear",
     "weight": 500,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 5,
     "speedPerCycle": 2,
     "kgToBeFull": 80
   },
   {
     "type": "eagle",
     "weight": 6,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 20,
     "speedPerCycle": 3,
     "kgToBeFull": 1
   },
   {
     "type": "horse",
     "weight": 400,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 20,
     "speedPerCycle": 4,
     "kgToBeFull": 60
   },
   {
     "type": "deer",
     "weight": 300,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 20,
     "speedPerCycle": 4,
     "kgToBeFull": 50
   },
   {
     "type": "rabbit",
     "weight": 2,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 150,
     "speedPerCycle": 2,
     "kgToBeFull": 0.45
   },
   {
     "type": "mouse",
     "weight": 0.05,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 500,
     "speedPerCycle": 1,
     "kgToBeFull": 0.01
   },
   {
     "type": "goat",
     "weight": 60,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 140,
     "speedPerCycle": 3,
     "kgToBeFull": 10
   },
   {
     "type": "sheep",
     "weight": 70,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 140,
     "speedPerCycle": 3,
     "kgToBeFull": 15
   },
   {
     "type": "boar",
     "weight": 400,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 50,
     "speedPerCycle": 2,
     "kgToBeFull": 50
   },
   {
     "type": "buffalo",
     "weight": 700,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 10,
     "speedPerCycle": 3,
     "kgToBeFull": 100
   },
   {
     "type": "duck",
     "weight": 1,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 200,
     "speedPerCycle": 4,
     "kgToBeFull": 0.15
   },
   {
     "type": "caterpillar",
     "weight": 0.01,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 1000,
     "speedPerCycle": 0,
     "kgToBeFull": 0
   },
   {
     "type": "plant",
     "weight": 1,
-    "maxAmountOnOneField": 4,
+    "maxAmountOnOneField": 200,
     "speedPerCycle": 0,
     "kgToBeFull": 0
   }

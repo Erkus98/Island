@@ -1,0 +1,431 @@
+[
+  {
+    "hunter": "wolf",
+    "victim": "rabbit",
+    "percentage": 60
+  },
+  {
+    "hunter": "wolf",
+    "victim": "wolf",
+    "percentage": 0
+  },
+  {
+    "hunter": "wolf",
+    "victim": "snake",
+    "percentage": 0
+  },
+  {
+    "hunter": "wolf",
+    "victim": "rabbit",
+    "percentage": 60
+  },
+  {
+    "hunter": "wolf",
+    "victim": "fox",
+    "percentage": 0
+  },
+  {
+    "hunter": "wolf",
+    "victim": "bear",
+    "percentage": 60
+  },
+  {
+    "hunter": "wolf",
+    "victim": "eagle",
+    "percentage": 60
+  },
+  {
+  "hunter": "wolf",
+  "victim": "horse",
+  "percentage": 10
+  },
+  {
+    "hunter": "wolf",
+    "victim": "deer",
+    "percentage": 15
+  },
+  {
+    "hunter": "wolf",
+    "victim": "mouse",
+    "percentage": 80
+  },
+  {
+    "hunter": "wolf",
+    "victim": "goat",
+    "percentage": 60
+  },
+  {
+    "hunter": "wolf",
+    "victim": "sheep",
+    "percentage": 70
+  },
+  {
+    "hunter": "wolf",
+    "victim": "boar",
+    "percentage": 60
+  },
+  {
+    "hunter": "wolf",
+    "victim": "buffalo",
+    "percentage": 60
+  },
+  {
+    "hunter": "wolf",
+    "victim": "duck",
+    "percentage": 40
+  },
+  {
+    "hunter": "wolf",
+    "victim": "caterpillar",
+    "percentage": 0
+  },
+  {
+    "hunter": "wolf",
+    "victim": "plant",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "wolf",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "snake",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "fox",
+    "percentage": 15
+  },
+  {
+    "hunter": "snake",
+    "victim": "bear",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "eagle",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "horse",
+    "percentage": 0
+  }
+,
+  {
+    "hunter": "snake",
+    "victim": "deer",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "rabbit",
+    "percentage": 20
+  },
+  {
+    "hunter": "snake",
+    "victim": "mouse",
+    "percentage": 40
+  },
+  {
+    "hunter": "snake",
+    "victim": "goat",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "sheep",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "boar",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "buffalo",
+    "percentage": 0
+  },
+  {
+    "hunter": "snake",
+    "victim": "duck",
+    "percentage": 10
+  },
+  {
+    "hunter": "snake",
+    "victim": "caterpillar",
+    "percentage": 0
+  },
+  {
+  "hunter": "snake",
+  "victim": "plant",
+  "percentage": 0
+},
+  {
+    "hunter": "fox",
+    "victim": "wolf",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "snake",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "fox",
+    "percentage": 15
+  },
+  {
+    "hunter": "fox",
+    "victim": "bear",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "eagle",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "horse",
+    "percentage": 0
+  }
+,
+  {
+    "hunter": "fox",
+    "victim": "deer",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "rabbit",
+    "percentage": 70
+  },
+  {
+    "hunter": "fox",
+    "victim": "mouse",
+    "percentage": 90
+  },
+  {
+    "hunter": "fox",
+    "victim": "goat",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "sheep",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "boar",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "buffalo",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "duck",
+    "percentage": 10
+  },
+  {
+    "hunter": "fox",
+    "victim": "caterpillar",
+    "percentage": 0
+  },
+  {
+    "hunter": "fox",
+    "victim": "plant",
+    "percentage": 0
+  },
+  {
+    "hunter": "bear",
+    "victim": "wolf",
+    "percentage": 0
+  },
+  {
+    "hunter": "bear",
+    "victim": "snake",
+    "percentage": 80
+  },
+  {
+    "hunter": "bear",
+    "victim": "fox",
+    "percentage": 0
+  },
+  {
+    "hunter": "bear",
+    "victim": "bear",
+    "percentage": 0
+  },
+  {
+    "hunter": "bear",
+    "victim": "eagle",
+    "percentage": 0
+  },
+  {
+    "hunter": "bear",
+    "victim": "horse",
+    "percentage": 40
+  }
+,
+  {
+    "hunter": "bear",
+    "victim": "deer",
+    "percentage": 80
+  },
+  {
+    "hunter": "bear",
+    "victim": "rabbit",
+    "percentage": 80
+  },
+  {
+    "hunter": "bear",
+    "victim": "mouse",
+    "percentage": 90
+  },
+  {
+    "hunter": "bear",
+    "victim": "goat",
+    "percentage": 70
+  },
+  {
+    "hunter": "bear",
+    "victim": "sheep",
+    "percentage": 70
+  },
+  {
+    "hunter": "bear",
+    "victim": "boar",
+    "percentage": 50
+  },
+  {
+    "hunter": "bear",
+    "victim": "buffalo",
+    "percentage": 20
+  },
+  {
+    "hunter": "bear",
+    "victim": "duck",
+    "percentage": 10
+  },
+  {
+    "hunter": "bear",
+    "victim": "caterpillar",
+    "percentage": 0
+  },
+  {
+    "hunter": "bear",
+    "victim": "plant",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "wolf",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "snake",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "fox",
+    "percentage": 10
+  },
+  {
+    "hunter": "eagle",
+    "victim": "bear",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "eagle",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "horse",
+    "percentage": 0
+  }
+,
+  {
+    "hunter": "eagle",
+    "victim": "deer",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "rabbit",
+    "percentage": 90
+  },
+  {
+    "hunter": "eagle",
+    "victim": "mouse",
+    "percentage": 90
+  },
+  {
+    "hunter": "eagle",
+    "victim": "goat",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "sheep",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "boar",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "buffalo",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "duck",
+    "percentage": 80
+  },
+  {
+    "hunter": "eagle",
+    "victim": "caterpillar",
+    "percentage": 0
+  },
+  {
+    "hunter": "eagle",
+    "victim": "plant",
+    "percentage": 0
+  },
+  {
+    "hunter": "mouse",
+    "victim": "caterpillar",
+    "percentage": 90
+  },
+  {
+    "hunter": "boar",
+    "victim": "mouse",
+    "percentage": 50
+  },
+  {
+    "hunter": "boar",
+    "victim": "caterpillar",
+    "percentage": 90
+  },
+  {
+    "hunter": "duck",
+    "victim": "caterpillar",
+    "percentage": 90
+  }
+    ]

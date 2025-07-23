@@ -1,16 +1,16 @@
 package erik.utility;
+
 import erik.Field;
 import erik.animals.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-
-public class EatingFunctionality {
-
-    public void consume(Future<Map<Field, List<Entity>>> island){
+public class ReproduceFunctionality {
+    public void reproduce(Future<Map<Field, List<Entity>>> island){
 
         try {
             Map<Field,List<Entity>> futureIsland = island.get();
@@ -20,11 +20,11 @@ public class EatingFunctionality {
                 List<Entity> animalsOnCurrentField = new ArrayList<>(entityList);
 
                 for (Entity entity : entityList){
-                   int victim = entity.eat(entity,animalsOnCurrentField);
-                    if(victim == 0 || victim == animalsOnCurrentField.indexOf(entity)){
+                    int victim = entity.eat(entity,animalsOnCurrentField);
+                    entity.reproduce();
+                    if(victim == 0){
                         continue;
                     }
-                    System.out.println(animalsOnCurrentField.get(victim).getType() + " was eaten by " + entity.getType());
                     animalsOnCurrentField.remove(victim);
                 }
             }
@@ -34,9 +34,6 @@ public class EatingFunctionality {
         } catch (InterruptedException e) {
             System.out.println(e.getCause() + " Consuming func. in Eating Class");
         }
-
-
     }
-
 
 }

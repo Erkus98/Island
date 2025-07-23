@@ -2,27 +2,21 @@ package erik.utility;
 
 import erik.Field;
 import erik.animals.Entity;
-import erik.animals.Predator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.*;
 
 public class IslandActions implements Callable<Map<Field, List<Entity>>>{
 
     ThreadLocalRandom random;
-    private final byte energyRequiredForMovement = 10;
 
     @Override
     public Map<Field, List<Entity>> call() throws Exception {
 
         EntityCreator entityCreator = new EntityCreator();
-        Map<Field, List<Entity>> island = new HashMap<>();
+        Map<Field, List<Entity>> island = new ConcurrentHashMap<>();
         for (short i = 1; i <= Field.ISLAND_LENGTH; i++) {
             for (short j = 1; j <= Field.ISLAND_WIDTH; j++) {
                 island.put(new Field(i, j), entityCreator.createAnimalList());
@@ -32,20 +26,27 @@ public class IslandActions implements Callable<Map<Field, List<Entity>>>{
     }
 
 
-    public void showAnimals(Future<Map<Field, List<Entity>>> island) throws Exception {
+    public void showAnimals(Future<Map<Field, List<Entity>>> island) {
 
 
-        Map<Field, List<String>> transformedIsland = new HashMap<>();
+        Map<Field, List<String>> transformedIsland = new ConcurrentHashMap<>();
 
-        island.get().entrySet().forEach(entry -> {
-            Field field = entry.getKey();
-            List<Entity> entityList = entry.getValue();
-            List<String> characterList = entityList.stream().map(Entity::transformFaces).toList();
-            transformedIsland.put(field, characterList);
-        });
+        try {
+            island.get().entrySet().forEach(entry -> {
+                Field field = entry.getKey();
+                List<Entity> entityList = entry.getValue();
+                List<String> characterList = entityList.stream().map(Entity::transformFaces).toList();
+                transformedIsland.put(field, characterList);
+            });
+        } catch (InterruptedException e) {
+            System.out.println("ShowAnimals method was Interrupted and errored!");
+        } catch (ExecutionException e) {
+            System.out.println("Runtime exception during showAnimals execution!");
+        }
 
 
         System.out.println(transformedIsland);
+        System.out.flush();
     }
 
     public void move(Future<Map<Field, List<Entity>>> islandFuture) {
@@ -127,14 +128,29 @@ public class IslandActions implements Callable<Map<Field, List<Entity>>>{
             return;
         }
         updatedEntityList.add(entity);
-      //  System.out.println(animal + " from field " + currentField + " moved to field " + newAnimalDestination);
+
     }
 
     private boolean reduceHealthOfAnimal(Entity entity){
-        entity.setHealth((byte) (entity.getHealth() -energyRequiredForMovement));
+        byte energyRequiredForMovement = 10;
+        entity.setHealth((byte) (entity.getHealth() - energyRequiredForMovement));
         if(entity.getHealth() <= 0){
             System.out.println(entity.getType() + " has died from starvation!");
             return true;
+        }
+        return false;
+    }
+    public boolean hasAnimals(Future<Map<Field,List<Entity>>> island){
+        try {
+            for(List<Entity> entities : island.get().values()){
+                if(!entities.isEmpty()){
+                    return true;
+                }
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
         }
         return false;
     }
