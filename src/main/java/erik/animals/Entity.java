@@ -1,14 +1,26 @@
 package erik.animals;
 
-public abstract class Animal {
+
+import erik.animal_actions.AnimalActivities;
+
+public abstract class Entity implements AnimalActivities {
     protected String type;
     protected double weight;
     protected int maxAmountOnOneField;
     protected int speedPerCycle;
     protected double kgToBeFull;
+    protected byte health = 100;
 
-    public Animal() {
+    protected Entity() {
 
+    }
+
+    public byte getHealth() {
+        return health;
+    }
+
+    public void setHealth(byte health) {
+        this.health = health;
     }
 
     public double getWeight() {
@@ -51,8 +63,8 @@ public abstract class Animal {
         this.type = type;
     }
 
-    public static String transformFaces(Animal animal) {
-        return switch (animal.getType()) {
+    public static String transformFaces(Entity entity) {
+        return switch (entity.getType()) {
             case "boar" -> "\uD83D\uDC17"; //🐗
 
             case "buffalo" -> "\uD83D\uDC03";//🐃
@@ -96,6 +108,7 @@ public abstract class Animal {
                 ", maxAmountOnOneField=" + maxAmountOnOneField +
                 ", speedPerCycle=" + speedPerCycle +
                 ", kgToBeFull=" + kgToBeFull +
+                ", health=" + health +
                 '}';
     }
 }

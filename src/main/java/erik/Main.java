@@ -1,6 +1,7 @@
 package erik;
 
-import erik.animals.Animal;
+import erik.animals.Entity;
+import erik.utility.EatingFunctionality;
 import erik.utility.IslandActions;
 
 import java.util.*;
@@ -10,32 +11,40 @@ import java.util.concurrent.Future;
 
 
 public class Main {
-    static Scanner scanner;
+
 
     public static void main(String[] args) throws Exception {
 
+        Object lock = new Object();
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        IslandActions islandActions = new IslandActions(lock);
+        EatingFunctionality eatingFunctionality = new EatingFunctionality(lock);
+        Future<Map<Field, List<Entity>>> island = executorService.submit(islandActions);
+        Map<Field,List<Entity>> islandMap = island.get();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(3);
-        IslandActions islandActions = new IslandActions();
-        Future<Map<Field, List<Animal>>> island = executorService.submit(islandActions);
+        while (islandActions.hasAnimals(islandMap)){
 
-        executorService.close();
-        scanner = new Scanner(System.in);
-        System.out.println("Would you like to see visual representation of animals? \n " + " Y/N \n");
-        String input = scanner.nextLine();
-        if (input.equals("Y")) {
-            islandActions.showAnimals(island);
-        } else {
-            return;
+            System.out.println("Start showing the island!");
+            System.out.flush();
+
+            Future<?> showData = executorService.submit(() -> islandActions.showAnimals(islandMap));
+            showData.get();
+            System.out.println("Ending showing the island!");
+            System.out.flush();
+            Future<?> moveData = executorService.submit(() -> islandActions.move(islandMap));
+            moveData.get();
+
+
+           Future<?> eatData = executorService.submit(() ->eatingFunctionality.consume(islandMap));
+           eatData.get();
+
+
+            System.out.println("_______End of cycle!_______");
         }
-        System.out.println("_________________________________");
 
-        islandActions.move(island);
-        islandActions.showAnimals(island);
-        // This comment is purely for testing ErikDev.
-
-        
-
+        System.out.println("All animals are dead!");
+        executorService.shutdown();
 
     }
+
 }
