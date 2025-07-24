@@ -1,23 +1,16 @@
 package erik.animals;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import erik.utility.ConsumingRatioCache;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 public class Predator extends Entity{
 
-    protected String hunter;
-    protected String victim;
-    protected double percentage;
 
     public Predator(){
 

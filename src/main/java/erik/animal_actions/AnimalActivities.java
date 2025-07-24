@@ -8,9 +8,4 @@ public interface AnimalActivities {
 
     int eat(Entity entity, List<Entity> animalsOnCurrentField);
 
-    default void reproduce(){
-
-
-    }
 }
-//TODO: Сделать дефолтный метод для размножения!
