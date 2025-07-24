@@ -35,7 +35,7 @@ public class EntityCreator {
 
 
     public List<Entity> createAnimalList() throws IOException {
-        List<Entity> entities = new ArrayList<>();
+        List<Entity> entities =Collections.synchronizedList(new ArrayList<>());
 
         JsonParser jsonParser = new JsonParser();
         Random random = new Random();

@@ -20,12 +20,7 @@ public class ReproduceFunctionality {
                 List<Entity> animalsOnCurrentField = new ArrayList<>(entityList);
 
                 for (Entity entity : entityList){
-                    int victim = entity.eat(entity,animalsOnCurrentField);
-                    entity.reproduce();
-                    if(victim == 0){
-                        continue;
-                    }
-                    animalsOnCurrentField.remove(victim);
+
                 }
             }
 

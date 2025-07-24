@@ -2,8 +2,10 @@ package erik.utility;
 
 import erik.Field;
 import erik.animals.Entity;
+import erik.animals.Plant;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
@@ -11,6 +13,11 @@ import java.util.concurrent.*;
 public class IslandActions implements Callable<Map<Field, List<Entity>>>{
 
     ThreadLocalRandom random;
+    private final Object lock;
+
+    public IslandActions(Object lock) {
+        this.lock = lock;
+    }
 
     @Override
     public Map<Field, List<Entity>> call() throws Exception {
@@ -26,57 +33,53 @@ public class IslandActions implements Callable<Map<Field, List<Entity>>>{
     }
 
 
-    public void showAnimals(Future<Map<Field, List<Entity>>> island) {
+    public void showAnimals(Map<Field, List<Entity>> island) {
 
+        synchronized (lock) {
+            Map<Field, List<String>> transformedIsland = new ConcurrentHashMap<>();
 
-        Map<Field, List<String>> transformedIsland = new ConcurrentHashMap<>();
-
-        try {
-            island.get().entrySet().forEach(entry -> {
+            island.entrySet().forEach(entry -> {
                 Field field = entry.getKey();
-                List<Entity> entityList = entry.getValue();
+                List<Entity> entityList = Collections.synchronizedList(new ArrayList<>(entry.getValue()));
                 List<String> characterList = entityList.stream().map(Entity::transformFaces).toList();
                 transformedIsland.put(field, characterList);
             });
-        } catch (InterruptedException e) {
-            System.out.println("ShowAnimals method was Interrupted and errored!");
-        } catch (ExecutionException e) {
-            System.out.println("Runtime exception during showAnimals execution!");
+
+
+            System.out.println(transformedIsland);
+            System.out.flush();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
-
-
-        System.out.println(transformedIsland);
-
     }
 
-    public void move(Future<Map<Field, List<Entity>>> islandFuture) {
-        try {
-            Map<Field, List<Entity>> islandMap = islandFuture.get();
+    public  void move(Map<Field, List<Entity>> islandFuture) {
+        synchronized (lock) {
+            Map<Field, List<Entity>> islandMap = islandFuture;
             if (islandMap == null) {
                 System.err.println("Error: Island map is null.");
                 return;
             }
-            List<Map.Entry<Field, List<Entity>>> entriesToProcess = new ArrayList<>(islandMap.entrySet());
+            List<Map.Entry<Field, List<Entity>>> entriesToProcess = Collections.synchronizedList(new ArrayList<>(islandMap.entrySet()));
 
             for (Map.Entry<Field, List<Entity>> entry : entriesToProcess) {
                 Field currentField = entry.getKey();
                 List<Entity> entityList = entry.getValue();
-                List<Entity> animalsOnCurrentField = new ArrayList<>(entityList);
+                List<Entity> animalsOnCurrentField =Collections.synchronizedList(new ArrayList<>(entityList));
 
                 for (Entity entity : animalsOnCurrentField) {
-
+                    if(entity.getType().equals("plant")){
+                        continue;
+                    }
                     Field newAnimalDestination = calculateNewAnimalPosition(entity, currentField);
 
 
                     updateIslandMap(islandMap, entity, currentField, newAnimalDestination);
                 }
             }
-        } catch (InterruptedException e) {
-            System.err.println("Thread was interrupted during island map retrieval: " + e.getMessage());
-            Thread.currentThread().interrupt();
-        } catch (ExecutionException e) {
-            System.err.println("Error during island map retrieval: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -123,7 +126,7 @@ public class IslandActions implements Callable<Map<Field, List<Entity>>>{
         }
 
 
-        List<Entity> updatedEntityList = islandMap.computeIfAbsent(newAnimalDestination, k -> new ArrayList<>());
+        List<Entity> updatedEntityList = islandMap.computeIfAbsent(newAnimalDestination, k -> Collections.synchronizedList(new ArrayList<>()));
         if(reduceHealthOfAnimal(entity)){
             return;
         }
@@ -140,17 +143,13 @@ public class IslandActions implements Callable<Map<Field, List<Entity>>>{
         }
         return false;
     }
-    public boolean hasAnimals(Future<Map<Field,List<Entity>>> island){
-        try {
-            for(List<Entity> entities : island.get().values()){
-                if(!entities.isEmpty()){
+    public boolean hasAnimals(Map<Field,List<Entity>> island){
+        for(List<Entity> entities : island.values()){
+            for(Entity entity : entities){
+                if(!(entity instanceof Plant)){
                     return true;
                 }
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
         }
         return false;
     }

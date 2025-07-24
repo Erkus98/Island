@@ -15,25 +15,28 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        Object lock = new Object();
         ExecutorService executorService = Executors.newFixedThreadPool(4);
-        IslandActions islandActions = new IslandActions();
-        EatingFunctionality eatingFunctionality = new EatingFunctionality();
+        IslandActions islandActions = new IslandActions(lock);
+        EatingFunctionality eatingFunctionality = new EatingFunctionality(lock);
         Future<Map<Field, List<Entity>>> island = executorService.submit(islandActions);
-        island.get();
-        while (islandActions.hasAnimals(island)){
+        Map<Field,List<Entity>> islandMap = island.get();
+
+        while (islandActions.hasAnimals(islandMap)){
 
             System.out.println("Start showing the island!");
             System.out.flush();
 
-            islandActions.showAnimals(island);
+            Future<?> showData = executorService.submit(() -> islandActions.showAnimals(islandMap));
+            showData.get();
             System.out.println("Ending showing the island!");
             System.out.flush();
-            Future<?> moveData = executorService.submit(() -> islandActions.move(island));
+            Future<?> moveData = executorService.submit(() -> islandActions.move(islandMap));
             moveData.get();
 
 
-           Future<?> eatData = executorService.submit(() ->eatingFunctionality.consume(island));
-          eatData.get();
+           Future<?> eatData = executorService.submit(() ->eatingFunctionality.consume(islandMap));
+           eatData.get();
 
 
             System.out.println("_______End of cycle!_______");
@@ -41,23 +44,6 @@ public class Main {
 
         System.out.println("All animals are dead!");
         executorService.shutdown();
-
-
-//        islandActions.showAnimals(island);
-//
-//        System.out.println("_________________________________");
-//
-//        islandActions.move(island);
-//        islandActions.showAnimals(island);
-//
-//        eatingFunctionality.consume(island);
-//        islandActions.showAnimals(island);
-//        executorService.close();
-
-
-
-
-
 
     }
 

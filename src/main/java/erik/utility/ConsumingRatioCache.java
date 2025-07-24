@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ConsumingRatioCache {
-    private static final Map<String, Map<String, Double>> ratioMap = new HashMap<>();
+    private static final Map<String, Map<String, Double>> ratioMap = new ConcurrentHashMap<>();
 
     static {
         loadConsumingRatios();
