@@ -1,8 +1,6 @@
 package erik;
 
-import erik.animal_actions.AnimalActivities;
 import erik.animals.Entity;
-import erik.animals.Herbivore;
 import erik.utility.EatingFunctionality;
 import erik.utility.IslandActions;
 
@@ -22,15 +20,13 @@ public class Main {
         EatingFunctionality eatingFunctionality = new EatingFunctionality();
         Future<Map<Field, List<Entity>>> island = executorService.submit(islandActions);
         island.get();
-
         while (islandActions.hasAnimals(island)){
 
-            System.out.println("Показ острова!");
+            System.out.println("Start showing the island!");
             System.out.flush();
 
-            Future<?> showData  = executorService.submit(() -> islandActions.showAnimals(island));
-            showData.get();
-            System.out.println("Конец показа острова!");
+            islandActions.showAnimals(island);
+            System.out.println("Ending showing the island!");
             System.out.flush();
             Future<?> moveData = executorService.submit(() -> islandActions.move(island));
             moveData.get();
@@ -40,7 +36,7 @@ public class Main {
           eatData.get();
 
 
-            System.out.println("_______Конец цикла!_______");
+            System.out.println("_______End of cycle!_______");
         }
 
         System.out.println("All animals are dead!");

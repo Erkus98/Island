@@ -46,7 +46,7 @@ public class IslandActions implements Callable<Map<Field, List<Entity>>>{
 
 
         System.out.println(transformedIsland);
-        System.out.flush();
+
     }
 
     public void move(Future<Map<Field, List<Entity>>> islandFuture) {
@@ -135,7 +135,7 @@ public class IslandActions implements Callable<Map<Field, List<Entity>>>{
         byte energyRequiredForMovement = 10;
         entity.setHealth((byte) (entity.getHealth() - energyRequiredForMovement));
         if(entity.getHealth() <= 0){
-            System.out.println(entity.getType() + " has died from starvation!");
+            //   System.out.println(entity.getType() + " has died from starvation!");
             return true;
         }
         return false;
