@@ -32,6 +32,9 @@ public class EntityCreator {
         EntityTypes.put("plant", Plant.class);
 
     }
+    public Map<String, Class<? extends Entity>> getEntityTypes() {
+        return EntityTypes;
+    }
 
 
     public List<Entity> createAnimalList() throws IOException {
