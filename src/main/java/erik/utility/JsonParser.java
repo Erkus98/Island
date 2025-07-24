@@ -16,7 +16,6 @@ public class JsonParser {
     private static final Map<String, JsonNode> cachedEntities = new HashMap<>();
     private static boolean initialized = false;
     public JsonParser() throws IOException {
-        // Кеш инициализируется только один раз
         if (!initialized) {
             synchronized (JsonParser.class) {
                 if (!initialized) {

@@ -20,9 +20,9 @@ public class Main {
         IslandActions islandActions = new IslandActions(lock);
         EatingFunctionality eatingFunctionality = new EatingFunctionality(lock);
         Future<Map<Field, List<Entity>>> island = executorService.submit(islandActions);
-        Map<Field,List<Entity>> islandMap = island.get();
+        Map<Field, List<Entity>> islandMap = island.get();
 
-        while (islandActions.hasAnimals(islandMap)){
+        while (islandActions.hasAnimals(islandMap)) {
 
             System.out.println("Start showing the island!");
             System.out.flush();
@@ -35,8 +35,8 @@ public class Main {
             moveData.get();
 
 
-           Future<?> eatData = executorService.submit(() ->eatingFunctionality.consume(islandMap));
-           eatData.get();
+            Future<?> eatData = executorService.submit(() -> eatingFunctionality.consume(islandMap));
+            eatData.get();
 
 
             System.out.println("_______End of cycle!_______");
