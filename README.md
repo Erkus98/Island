@@ -29,6 +29,7 @@ Run the simulation from your IDE or with:
 
 
 javac -d out src/**/*.java
+
 java -cp out Main
 
 Modify entity parameters in the JSON files if needed.
