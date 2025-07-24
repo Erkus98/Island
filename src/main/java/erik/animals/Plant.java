@@ -8,7 +8,6 @@ public class Plant extends Entity{
 
     }
    public int eat(Entity entity, List<Entity> animalsOnCurrentField){
-       System.out.println("Plants do not eat!");
        return 0;
     }
 
